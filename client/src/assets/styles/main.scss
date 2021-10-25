@@ -1,0 +1,20 @@
+@import "./anims.scss";
+
+:root {
+  --primary-color: #3767f7;
+  --secondary-color: white;
+  --primary-light-color: #d2dcfa;
+  --text-white-color: #f7f7f7;
+  --text-color: #474747;
+  color: var(--text-color);
+  scroll-behavior: smooth;
+  /* sizes */
+  --menu-width: 360px;
+  --room-top-bar-height: 74px;
+  --room-message-input-height: 80px;
+  --room-messages-height: calc(
+    100% - var(--room-top-bar-height) - var(--room-message-input-height)
+  );
+}
+
+/* conts */
