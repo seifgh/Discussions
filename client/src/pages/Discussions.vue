@@ -33,11 +33,11 @@
         </transition>
       </div>
     </div>
-    <div class="room">
-      <router-view v-if="$route.params.roomId"></router-view>
-      <div v-else class="intro">
+    <div class="discussions-route">
+      <div v-if="showIntro" class="intro">
         <h2>Please select a chat room from the menu.</h2>
       </div>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -82,6 +82,9 @@ export default {
     },
     showMenu() {
       return this.$store.state.togglers.showMenu;
+    },
+    showIntro() {
+      return this.$route.name == "discussions";
     },
     ...mapGetters(["rooms"]),
   },
@@ -134,7 +137,7 @@ export default {
     },
 
     handleRoomMembersUpdated({ room }) {
-      console.log("new room added");
+      ("new room added");
       this.$store.dispatch("updateRoomMembers", room);
     },
 
@@ -143,7 +146,7 @@ export default {
         socketIo.emit("join");
       });
       socketIo.on("joined", (msg) => {
-        console.log(msg);
+        msg;
       });
       socketIo.on("disconnect", () => console.log("socket closed"));
       socketIo.on("new-room-created", this.handleNewRoomCreatedEvent);
@@ -188,7 +191,7 @@ export default {
     }
   }
 }
-.room {
+.discussions-route {
   @screen md {
     width: calc(100% - var(--menu-width));
   }

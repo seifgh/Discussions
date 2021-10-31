@@ -40,7 +40,7 @@ export default {
     }
   }
   h3 {
-    @apply font-semibold text-4xl ml-2 text-primary;
+    @apply font-bold text-4xl ml-2 text-primary;
   }
   &.sm {
     svg {

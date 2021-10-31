@@ -59,7 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 .message {
-  @apply flex w-full justify-start items-end pt-1;
+  @apply flex w-full justify-start items-center pt-1;
 }
 .current-user-layout {
   @apply justify-end;

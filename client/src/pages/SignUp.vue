@@ -157,14 +157,14 @@ export default {
             "A user with this email already exists!<br/> Please try another email or sign in to your account.";
         } else if (error == "INPUTS") {
           notification.title = "Invalid inputs";
-          notification.content = "PLease re-check your fields again!";
+          notification.content = "Please re-check your fields again!";
         }
       }
       this.$notify(notification);
     },
   },
   mounted() {
-    console.log(axiosApi.defaults.headers["Authorization"]);
+    axiosApi.defaults.headers["Authorization"];
   },
 };
 </script>

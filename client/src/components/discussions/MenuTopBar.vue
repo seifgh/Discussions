@@ -23,10 +23,10 @@
               userData.email
             }}</small>
           </div>
-          <button>
+          <router-link :to="{ name: 'themeColor' }">
             <settings-icon />
             Settings
-          </button>
+          </router-link>
           <button @click="$store.dispatch('logout')">
             <logout-icon />
             Logout

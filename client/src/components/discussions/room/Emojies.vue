@@ -13,7 +13,7 @@
             <span
               v-for="(emojie, i) in emojies"
               :key="i"
-              @click="$emit('appendToMessage', emojie)"
+              @click.stop="$emit('appendToMessage', emojie)"
             >
               {{ emojie }}
             </span>

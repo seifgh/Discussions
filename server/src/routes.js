@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const { signInValidator, signUpValidator } = require("./validators/user");
-const { signIn, signUp, getUser, searchUsers } = require("./controllers/user");
+const { signInValidator, signUpValidator, updateFullNameValidator, updatePasswordValidator } = require("./validators/user");
+const { signIn, signUp, getUser, searchUsers, updateFullName, updatePassword } = require("./controllers/user");
 const ensureAuthentication = require("./middlewares/ensureAuthentication");
 const { createRoom, getUserRooms, getRoomDetails, deleteRoom, updateRoomMembers } = require("./controllers/room");
 const ensureRoomMember = require("./middlewares/ensureRoomMember");
@@ -14,6 +14,8 @@ userRouter.post("/sign-in", signInValidator, signIn);
 userRouter.post("/sign-up", signUpValidator, signUp);
 userRouter.get("/get", ensureAuthentication, getUser)
 userRouter.post("/search", ensureAuthentication, searchUsers);
+userRouter.put("/update/full-name", ensureAuthentication, updateFullNameValidator, updateFullName);
+userRouter.put("/update/password", ensureAuthentication, updatePasswordValidator, updatePassword);
 // -------------------------
 const roomRouter = Router();
 roomRouter.use(ensureAuthentication);
@@ -21,11 +23,12 @@ roomRouter.post("/create", createRoomValidator, createRoom);
 roomRouter.get("/user-rooms", getUserRooms);
 roomRouter.get("/details/:roomId", ensureRoomMember, getRoomDetails);
 roomRouter.delete("/delete/:roomId", ensureRoomCreator, deleteRoom);
-roomRouter.put("/update/members/:roomId", ensureRoomMember, updateRoomMembers)
-    // -------------------------
+roomRouter.put("/update/members/:roomId", ensureRoomMember, updateRoomMembers);
+// -------------------------
 const messageRouter = Router();
-messageRouter.post("/send/:roomId", ensureAuthentication, ensureRoomMember, sendMessageValidator, sendMessage);
-messageRouter.get("/room/:roomId", ensureAuthentication, ensureRoomMember, getRoomMessages);
+messageRouter.use(ensureAuthentication);
+messageRouter.post("/send/:roomId", ensureRoomMember, sendMessageValidator, sendMessage);
+messageRouter.get("/room/:roomId", ensureRoomMember, getRoomMessages);
 
 
 module.exports = [

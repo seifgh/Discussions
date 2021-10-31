@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import MessageInput from "../components/discussions/room/MessageInput.vue";
-import Messages from "../components/discussions/room/Messages.vue";
-import RoomTopBar from "../components/discussions/room/RoomTopBar.vue";
-import SpinnerLoading from "../components/SpinnerLoading.vue";
+import MessageInput from "../../components/discussions/room/MessageInput.vue";
+import Messages from "../../components/discussions/room/Messages.vue";
+import RoomTopBar from "../../components/discussions/room/RoomTopBar.vue";
+import SpinnerLoading from "../../components/SpinnerLoading.vue";
 
 export default {
   components: { SpinnerLoading, RoomTopBar, MessageInput, Messages },

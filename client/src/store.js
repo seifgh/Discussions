@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { API_ROUTES, axiosApi, getAuthToken, setAuthToken } from "./api";
 import router from "./router";
+import { resetThemeColor, setThemeColor } from "./theme-colors";
 import { routerSafePush } from "./utils";
 
 Vue.use(Vuex);
@@ -48,7 +49,8 @@ export default new Vuex.Store({
             return lastMessage && lastMessage.createdAt;
         },
         isCurrentOpenRoom: state => roomId => {
-            return state.openRoom.data._id == roomId;
+            const openRoomData = state.openRoom.data;
+            return openRoomData && openRoomData._id == roomId;
         },
         openRoomMembers: (state, getters) => {
             return state.openRoom.data.members.filter(
@@ -122,6 +124,7 @@ export default new Vuex.Store({
                         data: { user }
                     } = await axiosApi.get(API_ROUTES.getUser);
                     context.commit("setUser", user);
+                    setThemeColor();
                 } catch (err) {
                     if (err.response && err.response.status == 401)
                         context.dispatch("logout");
@@ -139,6 +142,7 @@ export default new Vuex.Store({
             context.commit("logout");
             setAuthToken(null);
             routerSafePush("/sign-in");
+            resetThemeColor();
         },
         async fetchUserRooms(context) {
             context.commit("setRooms", { isLoading: true });
@@ -173,6 +177,7 @@ export default new Vuex.Store({
         },
         updateRoomsLastMessage(context, message) {
             const updatedRooms = context.state.rooms.data.map(room => {
+                room;
                 if (message.room == room._id) {
                     room.lastMessage = message;
                     room.updatedAt = message.createdAt;
@@ -225,7 +230,7 @@ export default new Vuex.Store({
                     context.commit("setOpenRoom", openRoom);
                 } else {
                     const roomDoesNotExists = !context.getters.getRoomById(newRoom._id);
-                    console.log({ roomDoesNotExists });
+                    ({ roomDoesNotExists });
                     if (roomDoesNotExists) {
                         delete newRoom.members;
                         delete newRoom.creator;

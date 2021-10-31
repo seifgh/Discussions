@@ -4,7 +4,11 @@ import Vue from "vue";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Discussions from "./pages/Discussions";
-import Room from "./pages/Room";
+import Room from "./pages/discussions/Room";
+import Settings from "./pages/discussions/Settings";
+import Account from "./pages/discussions/settings/Account";
+import ThemeColor from "./pages/discussions/settings/ThemeColor";
+
 // --------------------
 
 Vue.use(Router);
@@ -24,11 +28,28 @@ export default new Router({
         },
         {
             path: "/discussions",
+            name: "discussions",
             component: Discussions,
             children: [{
-                path: ":roomId",
-                component: Room
-            }]
+                    path: "room/:roomId",
+                    component: Room
+                },
+                {
+                    path: "settings",
+                    component: Settings,
+                    children: [{
+                            path: "account",
+                            name: "account",
+                            component: Account
+                        },
+                        {
+                            path: "theme-color",
+                            name: "themeColor",
+                            component: ThemeColor
+                        }
+                    ]
+                }
+            ]
         }
     ]
 });

@@ -47,9 +47,6 @@ export default {
       &:first-child {
         @apply m-0 mr-2;
       }
-      &:last-child {
-        @apply m-0 ml-2;
-      }
     }
   }
   &.lg {
@@ -64,10 +61,16 @@ export default {
   svg {
     @apply md:ml-3 ml-2 md:w-6 w-5 md:h-6 h-5;
   }
+  svg {
+    &:first-child {
+      @apply m-0 mr-2;
+    }
+  }
   &.flat {
     @apply w-full;
   }
-  &.primary {
+  &.primary,
+  &.router-link-active {
     @apply bg-primary text-white-gray border-primary;
     svg {
       path {
@@ -97,9 +100,15 @@ export default {
 }
 
 .container-1 {
-  @apply flex items-center h-screen p-4;
+  @screen md {
+    @apply flex items-center h-screen;
+  }
+  @apply block p-4;
   .part-1 {
-    @apply h-full w-2/5 bg-primary p-8 rounded-2xl overflow-hidden;
+    @screen md {
+      @apply w-2/5;
+    }
+    @apply h-full bg-primary p-8 rounded-2xl overflow-hidden;
     h2 {
       @apply text-white-gray my-8 font-semibold text-xl;
     }
@@ -108,9 +117,12 @@ export default {
     }
   }
   .part-2 {
-    @apply h-full flex flex-col justify-center p-12;
+    @screen md {
+      @apply px-12;
+    }
+    @apply h-full flex flex-col justify-center py-12 px-2;
     .content {
-      @apply block w-96;
+      @apply block w-96 max-w-full;
     }
     h1 {
       @apply text-6xl font-black mb-8;

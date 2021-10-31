@@ -150,7 +150,7 @@ export default {
   methods: {
     removeMember(index) {
       this.members.splice(index, 1);
-      console.log(this.members);
+      this.members;
     },
     async searchMembers() {
       const { searchMembersData } = this.$data;
@@ -198,7 +198,7 @@ export default {
         Object.assign(this.$data, initData());
         this.$v.$reset();
       } catch (err) {
-        console.log({ err });
+        ({ err });
         this.handleCreateRoomApiErrors(err);
       }
     },
@@ -213,7 +213,7 @@ export default {
       if (error) {
         if (error == "INPUTS") {
           notification.title = "Invalid inputs";
-          notification.content = "PLease re-check your fields again!";
+          notification.content = "Please re-check your fields again!";
         }
       }
       this.$notify(notification);

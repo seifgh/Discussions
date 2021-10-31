@@ -1,7 +1,7 @@
 <template>
   <div class="messages">
     <empty-messages v-if="noMessagesFound" />
-    <small v-else-if="!messages.hasMore" class="">No more messages</small>
+    <small v-else-if="!messages.hasMore" class="mb-8">No more messages</small>
     <button
       v-show="messages.hasMore"
       ref="observeTarget"
@@ -88,18 +88,11 @@ export default {
       const scrollArea = this.$el;
       setTimeout(() => scrollArea.scrollTo(0, scrollArea.scrollHeight));
     },
-    userIsNotScrolling() {
-      // check if user is not at the top of scroll area
-      const scrollArea = this.$el;
-      console.log(this.$el);
-      const { clientHeight, scrollTop } = scrollArea;
-      return scrollTop > clientHeight / 3;
-    },
     // -------------------
     handleReceiveMessage(message) {
       if (this.$store.getters.isCurrentOpenRoom(message.room)) {
         this.$store.dispatch("pushOpenRoomNewMessage", message);
-        if (this.userIsNotScrolling()) this.scrollToBottom();
+        this.scrollToBottom();
       }
     },
     listenToWebsocketEvents() {

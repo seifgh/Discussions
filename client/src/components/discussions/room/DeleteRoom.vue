@@ -32,7 +32,7 @@ export default {
         });
         this.$store.dispatch("removeRoom", this.openRoomData._id);
       } catch (err) {
-        console.log(err);
+        err;
         this.handleDeleteRoomApiErrors(err);
       }
       this.isLoading = false;

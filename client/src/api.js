@@ -22,6 +22,8 @@ export const API_ROUTES = {
     signIn: "/user/sign-in", // body: [email, password]
     signUp: "/user/sign-up", // body: [fullName, email, password]
     searchUsers: "/user/search", // body: [searchKey: [email or fullName] , excludedUsers]
+    updateUserFullName: "/user/update/full-name", // body: [fullName, password]
+    updateUserPassword: "/user/update/password", // body: [newPassword, currentPassword]
 
     getUserRooms: "/room/user-rooms",
     createNewRoom: "/room/create", // body: [name, members:[userId] ]

@@ -46,6 +46,9 @@ input {
 }
 
 .err {
-  @apply text-primary text-xs;
+  @apply block text-primary text-xs;
+}
+.info {
+  @apply block text-gray-400 text-xs font-bold mt-1;
 }
 </style>

@@ -1,18 +1,11 @@
-const { SECRET_JWT_CODE } = require("../settings");
-const jwtVerify = require("jsonwebtoken").verify;
 const User = require("../models/user");
+const { getUserIdFromJwt } = require("./jwt");
 
 module.exports = async(req) => {
     const authToken = req.headers.authorization;
     if (authToken) {
         try {
-            const decoded = jwtVerify(
-                authToken.replace("Bearer ", ""),
-                SECRET_JWT_CODE
-            );
-
-            const user = await User.findById(decoded.id, "-password -__v");
-
+            const user = await User.findById(getUserIdFromJwt(authToken), "-password -__v");
             if (user) {
                 req.user = user;
                 req.isAuthenticated = true;

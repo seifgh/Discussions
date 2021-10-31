@@ -133,7 +133,7 @@ export default {
             "The password you entered was wrong! <br/> Please re-check your password to sign in.";
         } else if (error == "INPUTS") {
           notification.title = "Invalid inputs";
-          notification.content = "PLease re-check your fields again!";
+          notification.content = "Please re-check your fields again!";
         }
       }
       this.$notify(notification);

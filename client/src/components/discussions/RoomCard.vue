@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="'/discussions/' + room._id"
+    :to="'/discussions/room/' + room._id"
     class="room-card"
     @click.native="scrollToBottom"
   >
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     scrollToBottom() {
-      console.log("hiiiiiiiiii");
+      ("hiiiiiiiiii");
       document.scrollingElement.scrollTo(
         0,
         document.scrollingElement.scrollHeight * 2
