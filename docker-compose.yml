@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  server:
+    image: discussions-server
+    volumes:
+      - ./server/:/usr/src/app
+    env_file: ./server/.dockerenv
+    ports:
+      - "4000:4000"
+    links:
+      - database
+
+  database:
+    image: mongo
+
+  client:
+    image: discussions-client
+    volumes:
+      - ./client/:/usr/src/app
+    env_file: ./client/.dockerenv
+    ports:
+      - "8080:8080"
