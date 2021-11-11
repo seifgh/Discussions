@@ -8,8 +8,9 @@ import App from "./App.vue";
 // ----------------------
 Vue.config.productionTip = false;
 Vue.use(notificationsPlugin);
+require("dotenv").config();
 new Vue({
-    render: h => h(App),
-    router,
-    store
+  render: h => h(App),
+  router,
+  store
 }).$mount("#app");

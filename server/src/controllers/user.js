@@ -14,7 +14,6 @@ function formatUserResponse(user) {
     }
 }
 
-
 module.exports = {
     async signIn(req, res) {
         const { password, email } = req.body;
@@ -61,6 +60,7 @@ module.exports = {
         }).limit(SEARCH_USERS_LIMIT);
         res.json({ foundUsers });
     },
+
     async updateFullName(req, res) {
         const { fullName, password } = req.body;
         const user = await User.findOne(req.user._id);
@@ -76,6 +76,7 @@ module.exports = {
             res.status(400).json({ error: "MONGO", details: err });
         }
     },
+
     async updatePassword(req, res) {
         const { newPassword, currentPassword } = req.body;
         const user = await User.findOne(req.user._id);

@@ -29,7 +29,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .logo {
-  @apply flex items-center;
+  @apply flex items-center flex-wrap;
   svg {
     width: 64px;
     * {

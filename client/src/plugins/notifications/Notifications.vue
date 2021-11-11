@@ -60,10 +60,13 @@ export default {
   @apply fixed right-0 top-0 overflow-y-auto max-h-screen h-auto;
 }
 .notification-card {
+  @screen md {
+    --width: 500px;
+  }
   --min-height: 80px;
-  width: 500px;
+  --width: calc(100% - 1rem * 2);
+  width: var(--width);
   min-height: var(--min-height);
-  max-width: 100%;
   z-index: 1000;
   box-shadow: 0px 1px 4px 0px #00000026;
   @apply relative flex items-start justify-start max-w-full

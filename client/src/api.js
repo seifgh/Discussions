@@ -1,41 +1,41 @@
 import axios from "axios";
 
 export const getAuthToken = () => {
-    if (localStorage.authToken) return "Bearer " + localStorage.authToken;
+  if (localStorage.authToken) return "Bearer " + localStorage.authToken;
 };
 
 export const axiosApi = axios.create({
-    baseURL: "http://localhost:4000",
-    headers: {
-        Authorization: getAuthToken()
-    }
+  baseURL: process.env.API_ENDPOINT || "http://localhost:4000",
+  headers: {
+    Authorization: getAuthToken()
+  }
 });
 
 export const setAuthToken = authToken => {
-    if (authToken) localStorage.authToken = authToken;
-    else delete localStorage.authToken;
-    axiosApi.defaults.headers.Authorization = getAuthToken();
+  if (authToken) localStorage.authToken = authToken;
+  else delete localStorage.authToken;
+  axiosApi.defaults.headers.Authorization = getAuthToken();
 };
 
 export const API_ROUTES = {
-    getUser: "/user/get",
-    signIn: "/user/sign-in", // body: [email, password]
-    signUp: "/user/sign-up", // body: [fullName, email, password]
-    searchUsers: "/user/search", // body: [searchKey: [email or fullName] , excludedUsers]
-    updateUserFullName: "/user/update/full-name", // body: [fullName, password]
-    updateUserPassword: "/user/update/password", // body: [newPassword, currentPassword]
+  getUser: "/user/get",
+  signIn: "/user/sign-in", // body: [email, password]
+  signUp: "/user/sign-up", // body: [fullName, email, password]
+  searchUsers: "/user/search", // body: [searchKey: [email or fullName] , excludedUsers]
+  updateUserFullName: "/user/update/full-name", // body: [fullName, password]
+  updateUserPassword: "/user/update/password", // body: [newPassword, currentPassword]
 
-    getUserRooms: "/room/user-rooms",
-    createNewRoom: "/room/create", // body: [name, members:[userId] ]
-    getRoomDetails: roomId => "/room/details/" + roomId,
-    deleteRoom: roomId => "/room/delete/" + roomId,
-    updateRoomMembers: roomId => "/room/update/members/" + roomId,
+  getUserRooms: "/room/user-rooms",
+  createNewRoom: "/room/create", // body: [name, members:[userId] ]
+  getRoomDetails: roomId => "/room/details/" + roomId,
+  deleteRoom: roomId => "/room/delete/" + roomId,
+  updateRoomMembers: roomId => "/room/update/members/" + roomId,
 
-    getRoomMessages: (roomId, lastMessageCreationDate) =>
-        "/message/room/" +
-        roomId +
-        (lastMessageCreationDate ?
-            `?lastMessageCreationDate=${lastMessageCreationDate}` :
-            ""),
-    sendRoomMessage: roomId => "/message/send/" + roomId // body : [content]
+  getRoomMessages: (roomId, lastMessageCreationDate) =>
+    "/message/room/" +
+    roomId +
+    (lastMessageCreationDate
+      ? `?lastMessageCreationDate=${lastMessageCreationDate}`
+      : ""),
+  sendRoomMessage: roomId => "/message/send/" + roomId // body : [content]
 };
