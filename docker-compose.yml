@@ -1,22 +1,33 @@
 version: "3.7"
 services:
+
+  client:
+    container_name: discussions-client
+    image: discussions-client:latest
+    build: ./client
+    # volumes:
+    #   - ./client/:/usr/src/app
+    env_file: ./client/.dockerenv
+    depends_on:
+      - server
+    ports:
+      - "8080:8080"
+
+
   server:
-    image: discussions-server
-    volumes:
-      - ./server/:/usr/src/app
+    container_name: discussions-server
+    build: ./server
+    image: discussions-server:latest
+    # volumes:
+    #   - ./server/:/usr/src/app
     env_file: ./server/.dockerenv
     ports:
       - "4000:4000"
-    links:
+      
+    depends_on:
       - database
 
   database:
     image: mongo
 
-  client:
-    image: discussions-client
-    volumes:
-      - ./client/:/usr/src/app
-    env_file: ./client/.dockerenv
-    ports:
-      - "8080:8080"
+ 

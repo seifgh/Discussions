@@ -1,10 +1,7 @@
 FROM node:16.13.0-alpine
 
 WORKDIR /usr/src/app
-COPY package*.json ./
-
-RUN npm install
-
-EXPOSE 4000
+COPY . .
+RUN npm install --force
 
 CMD ["npm", "start"]
